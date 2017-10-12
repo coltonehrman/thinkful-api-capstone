@@ -1,20 +1,24 @@
 .place {
-  & > nav {
-    background: #67B26F;
-    background: linear-gradient(to left, $light-blue, $dark-blue);
-    border-bottom: 3px solid $light-blue;
+  &__header {
+    background-color: $light;
+    font-size: 1rem;
+    padding: 25px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    & .back-btn {
+      background-color: transparent;
+      border: 0;
+      
+      & > i {
+        font-size: 2rem;
+      }
+    }
   }
+  
   &__name {
     margin: 0;
-    margin-left: 15px;
-
-    @media only screen and (max-width: 540px) {
-      font-size: 1.5rem !important;
-    }
-
-    @media only screen and (max-width: 390px) {
-      font-size: 1rem !important;
-    }
   }
 
   &__item {

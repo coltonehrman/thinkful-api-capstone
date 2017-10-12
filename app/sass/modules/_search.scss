@@ -1,0 +1,32 @@
+.place-search {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba($light, 0.95) !important;
+  border-bottom: 1px solid $light !important;
+  color: $dark !important;
+  height: 4rem !important;
+  margin: 0 !important;
+  padding: 6px 50px !important;
+  font-size: 1.15rem !important;
+
+  &:focus {
+    border-bottom: 1px solid $dark !important;
+    box-shadow: none !important;
+  }
+
+  &__results {
+    position: fixed;
+    top: 4rem;
+    left: 50px;
+    right: 50px;
+  }
+}
+
+.results__item {
+  background-color: $light;
+  cursor: pointer;
+  padding: 25px;
+  border-bottom: 1px solid $dark;
+}

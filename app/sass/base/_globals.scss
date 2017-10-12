@@ -1,45 +1,14 @@
 * {
-  box-sizing: border-box;
+  box-sizing: border-box !important;
 }
 
 html, body {
   height: 100%;
-}
-
-body {
-  background-color: $light-blue;
+  background-color: $dark;
+  color: $dark;
 }
 
 .map {
   height: 100%;
   width: 100%;
-}
-
-.activator {
-  cursor: pointer;
-}
-
-.progress {
-  background-color: $light-blue;
-
-  & .indeterminate {
-    background-color: $dark-blue;
-  }
-}
-
-.btn, .btn-large {
-  background-color: $dark-blue;
-}
-
-.btn-flat {
-  background-color: transparent;
-}
-
-.btn:hover, .btn-large:hover {
-  background-color: $light-blue;
-}
-
-.br-theme-fontawesome-stars-o .br-widget a.br-selected::after,
-.br-theme-fontawesome-stars-o .br-widget a.br-fractional:after {
-  color: $dark-blue;
 }

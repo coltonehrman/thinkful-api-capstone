@@ -1,4 +1,4 @@
-/* global window google $ document */
+/* global window $ document */
 import { autocomplete, getLatLong } from './lib/google';
 import UIController, { DOM } from './controllers/UIController';
 import AttractionsController from './controllers/AttractionsController';
@@ -8,6 +8,7 @@ function setupEventListeners() {
 
   $placeSearch.on('keyup', () => {
     const search = $placeSearch.val().trim();
+
     if (search === '') {
       UIController.Search.hideResults();
     } else {
@@ -21,7 +22,7 @@ function setupEventListeners() {
   });
 
   $(document).on('click', DOM.searchResult, (e) => {
-    const $place = $(e.target).parents(DOM.searchResult);
+    const $place = $(e.target);
     const name = $place.text().trim();
     const placeId = $place.data('place-id').trim();
 

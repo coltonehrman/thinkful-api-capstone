@@ -1,6 +1,11 @@
 .screen {
   display: none;
   height: 100%;
+  padding: 50px;
+
+  &.padding-t {
+    padding-top: 100px;
+  }
 
   & .valign {
     width: 100%;
