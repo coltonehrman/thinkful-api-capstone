@@ -7,29 +7,27 @@
     <meta name="description" content="">
 
     <!-- Import Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
     <!-- Import Google Icon Font -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Import Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- Import materialize.css -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css"> -->
 
-    <link rel="stylesheet" href="css/styles-811574b210.css"/>
+    <link rel="stylesheet" href="css/styles-2a78d94ada.css"/>
   </head>
 
   <body>
 
-    <div class="home screen padding-t">
+    <div class="home screen">
+      <h1 class="header-text">I Need A Vacation.</h1>
+      <h3 class="header-text__subtext">Find places around your destination</h3>
+      
       <input class="place-search" type="search" placeholder="Ex. Las Vegas, Houston">
-      <ul class="place-search__results results__list"></ul>
-
-      <div class="block">
-        <h1>I Need a Vacation</h1>
-        <p>Search for a location in the search bar below! Have autocomplete results show up during search. Once you find the place you are looking for click on it in the results. A new screen will display with a list of popular places around the area you searched for. Each item in the list will contain information such as: image, place name, current hours, category, address, rating, price level, and a map showing the location. The map can be accessed be either clicking on the place's image or the marker icon to the right of the category.</p>
-
-        <p>Want to search another place? Click the back button at the top right of the nav bar, or refresh the page.</p>
-      </div>
+      <ul class="place-results">
+        <li class="no-results">No Results...</li>
+      </ul>
     </div>
 
     <div class="place screen">

@@ -65,18 +65,18 @@
 	    var search = $placeSearch.val().trim();
 
 	    if (search === '') {
-	      _UIController2.default.Search.hideResults();
+	      _UIController2.default.Search.clearResults();
 	    } else {
 	      _UIController2.default.Search.clearResults();
 	      (0, _google.autocomplete)(search).then(function (results) {
 	        return _UIController2.default.Search.displayResults(results);
 	      }).catch(function () {
-	        return _UIController2.default.Search.hideResults();
+	        return _UIController2.default.Search.clearResults();
 	      });
 	    }
 	  });
 
-	  $(document).on('click', _UIController.DOM.searchResult, function (e) {
+	  $(document).on('click', _UIController.DOM.placeResult, function (e) {
 	    var $place = $(e.target);
 	    var name = $place.text().trim();
 	    var placeId = $place.data('place-id').trim();
@@ -283,17 +283,17 @@
 	  screens: '.screen',
 	  homeScreen: '.home.screen',
 	  placeScreen: '.place.screen',
-	  placeSearch: '.place-search',
 	  backButton: '.back-btn',
-	  searchResults: '.results__list',
-	  searchResult: '.results__item',
 	  progressBar: '.progress',
 	  categoryContainer: '.place__categories',
 	  categories: '.place__category',
 	  googleMapActivator: '.activator',
+	  noResults: '.no-results',
 	  place: '.place__item',
 	  placeName: '.place__name',
-	  placeResults: '.place__results',
+	  placeSearch: '.place-search',
+	  placeResults: '.place-results',
+	  placeResult: '.place-result',
 	  placeRating: '.place__rating'
 	};
 
@@ -341,35 +341,28 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function hideResults() {
-	  $(_DOM2.default.searchResults).hide();
-	} /* global $ */
-
-
 	function clearResults() {
-	  $(_DOM2.default.searchResults).empty();
-	}
-
+	  $(_DOM2.default.placeResult).remove();
+	  $(_DOM2.default.noResults).show();
+	} /* global $ */
 	exports.default = {
-	  hideResults: hideResults,
 	  clearResults: clearResults,
 	  focus: function focus() {
 	    $(_DOM2.default.placeSearch).focus();
 	  },
 	  displayResults: function displayResults(results) {
-	    var $searchResults = $(_DOM2.default.searchResults);
-	    $searchResults.empty();
+	    var $placeResults = $(_DOM2.default.placeResults);
+	    $(_DOM2.default.noResults).hide();
 
 	    results.forEach(function (result) {
-	      $searchResults.append('<li class="' + _DOM2.default.searchResult.slice(1) + '" data-place-id="' + result.id + '">\n          ' + result.name + '\n        </li>');
+	      $placeResults.append('<li class="' + _DOM2.default.placeResult.slice(1) + '" data-place-id="' + result.id + '">\n          ' + result.name + '\n        </li>');
 	    });
 
-	    $searchResults.show();
+	    $placeResults.show();
 	  },
 	  clear: function clear() {
 	    $(_DOM2.default.placeSearch).val('');
 	    clearResults();
-	    hideResults();
 	  }
 	};
 

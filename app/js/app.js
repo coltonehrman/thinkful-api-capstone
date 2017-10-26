@@ -10,18 +10,18 @@ function setupEventListeners() {
     const search = $placeSearch.val().trim();
 
     if (search === '') {
-      UIController.Search.hideResults();
+      UIController.Search.clearResults();
     } else {
       UIController.Search.clearResults();
       autocomplete(search).then(results =>
         UIController.Search.displayResults(results),
       ).catch(() =>
-        UIController.Search.hideResults(),
+        UIController.Search.clearResults(),
       );
     }
   });
 
-  $(document).on('click', DOM.searchResult, (e) => {
+  $(document).on('click', DOM.placeResult, (e) => {
     const $place = $(e.target);
     const name = $place.text().trim();
     const placeId = $place.data('place-id').trim();

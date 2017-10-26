@@ -1,37 +1,32 @@
 /* global $ */
 import DOM from './DOM';
 
-function hideResults() {
-  $(DOM.searchResults).hide();
-}
-
 function clearResults() {
-  $(DOM.searchResults).empty();
+  $(DOM.placeResult).remove();
+  $(DOM.noResults).show();
 }
 
 export default {
-  hideResults,
   clearResults,
   focus() {
     $(DOM.placeSearch).focus();
   },
   displayResults(results) {
-    const $searchResults = $(DOM.searchResults);
-    $searchResults.empty();
+    const $placeResults = $(DOM.placeResults);
+    $(DOM.noResults).hide();
 
     results.forEach((result) => {
-      $searchResults.append(
-        `<li class="${DOM.searchResult.slice(1)}" data-place-id="${result.id}">
+      $placeResults.append(
+        `<li class="${DOM.placeResult.slice(1)}" data-place-id="${result.id}">
           ${result.name}
         </li>`,
       );
     });
 
-    $searchResults.show();
+    $placeResults.show();
   },
   clear() {
     $(DOM.placeSearch).val('');
     clearResults();
-    hideResults();
   },
 };
