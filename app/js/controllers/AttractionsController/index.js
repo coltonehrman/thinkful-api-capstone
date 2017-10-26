@@ -13,39 +13,39 @@ function parseCategory(iconUrl) {
   return category.split('_').map(cat => `${cat[0].toUpperCase()}${cat.slice(1)}`).join(' ');
 }
 
-function parsePlace(place) {
+function parseAttraction(attraction) {
   const data = {};
 
-  data.name = place.venue.name;
+  data.name = attraction.venue.name;
 
-  place.venue.categories.forEach((category) => {
+  attraction.venue.categories.forEach((category) => {
     data.icon = parseIcon(32, category.icon);
     data.category = parseCategory(data.icon);
   });
 
-  if (typeof place.venue.hours !== 'undefined') {
-    data.open = place.venue.hours.isOpen;
-    data.hours = place.venue.hours.status;
+  if (typeof attraction.venue.hours !== 'undefined') {
+    data.open = attraction.venue.hours.isOpen;
+    data.hours = attraction.venue.hours.status;
   }
 
-  if (typeof place.venue.location !== 'undefined') {
-    data.address = place.venue.location.formattedAddress.join(', ');
+  if (typeof attraction.venue.location !== 'undefined') {
+    data.address = attraction.venue.location.formattedAddress.join(', ');
     data.coords = {
-      lat: place.venue.location.lat,
-      lng: place.venue.location.lng,
+      lat: attraction.venue.location.lat,
+      lng: attraction.venue.location.lng,
     };
   }
 
-  if (place.venue.photos.count !== 0) {
-    data.photo = parsePhoto('500x300', place.venue.photos.groups[0].items[0]);
+  if (attraction.venue.photos.count !== 0) {
+    data.photo = parsePhoto('500x300', attraction.venue.photos.groups[0].items[0]);
   }
 
-  if (typeof place.venue.price !== 'undefined') {
-    data.price = place.venue.price.currency.repeat(place.venue.price.tier);
+  if (typeof attraction.venue.price !== 'undefined') {
+    data.price = attraction.venue.price.currency.repeat(attraction.venue.price.tier);
   }
 
-  if (typeof place.venue.rating !== 'undefined') {
-    data.rating = place.venue.rating;
+  if (typeof attraction.venue.rating !== 'undefined') {
+    data.rating = attraction.venue.rating;
   }
 
   return data;
@@ -55,15 +55,15 @@ export default {
   findAttractions(coords) {
     return new Promise((resolve) => {
       getAttractions(coords).then((res) => {
-        const places = [];
+        const attractions = [];
 
         res.groups.forEach((group) => {
-          group.items.forEach((place) => {
-            places.push(parsePlace(place));
+          group.items.forEach((attraction) => {
+            attractions.push(parseAttraction(attraction));
           });
         });
 
-        resolve(places);
+        resolve(attractions);
       });
     });
   },

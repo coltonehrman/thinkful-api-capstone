@@ -27,13 +27,13 @@ function setupEventListeners() {
     const placeId = $place.data('place-id').trim();
 
     UIController.Search.clear();
-    UIController.Place.setPlaceName(name);
+    UIController.Place.setLogo(name);
     UIController.Screen.goTo(DOM.placeScreen);
 
     getLatLong(placeId).then((loc) => {
       AttractionsController.findAttractions(loc).then((attractions) => {
-        UIController.Place.toggleProgress();
-        UIController.Place.displayPlaces(attractions);
+        // UIController.Place.toggleProgress();
+        UIController.Place.displayAttractions(attractions);
       });
     });
   });

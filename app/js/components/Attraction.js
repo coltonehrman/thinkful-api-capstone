@@ -1,7 +1,7 @@
 /* global google $ */
 import { DOM } from '../controllers/UIController';
 
-export default class Place {
+export default class Attraction {
   constructor(place) {
     this.place = place;
     this.$element = this.createElement();

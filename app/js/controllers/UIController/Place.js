@@ -1,7 +1,7 @@
 /* global $ */
 import state from '../../modules/state';
 import DOM from './DOM';
-import Place from '../../components/Place';
+import Attraction from '../../components/Attraction';
 
 let progressVisible = true;
 
@@ -15,21 +15,15 @@ function toggleProgress() {
   }
 }
 
-function setPlaceName(name) {
-  $(DOM.placeName).text(name);
+function setLogo(text) {
+  $(DOM.headerLogo).text(text);
 }
 
-function appendPlaces(places) {
-  const $placeResults = $(DOM.placeResults);
-  places.forEach((place, i) => {
-    if (i % 2 === 0) {
-      const $row = $('<div class="row"></div>');
-      $row.append(place.$element);
-      $placeResults.append($row);
-    } else {
-      $placeResults.find('.row').last().append(place.$element);
-    }
-  });
+function appendAttractions(attractions) {
+  const $attractions = $(DOM.attractions);
+  attractions.forEach(attraction => (
+    $attractions.append(attraction.$element)
+  ));
 }
 
 function clearCategories() {
@@ -41,12 +35,12 @@ function clearPlaces() {
 }
 
 export default {
-  setPlaceName,
+  setLogo,
   toggleProgress,
-  displayPlaces(places) {
-    const placeCategories = places.map(place => place.category);
-    const categories = placeCategories.filter((cat, i) =>
-      placeCategories.indexOf(cat) === i,
+  displayAttractions(attractions) {
+    const attractionCategories = attractions.map(attraction => attraction.category);
+    const categories = attractionCategories.filter((cat, i) =>
+      attractionCategories.indexOf(cat) === i,
     );
 
     clearCategories();
@@ -55,7 +49,7 @@ export default {
       `<a class="${DOM.categories.slice(1)} waves-effect btn-flat btn">${cat}</a>`,
     ));
 
-    state.places = places.map(place => new Place(place)).sort((a, b) => {
+    state.attractions = attractions.map(attraction => new Attraction(attraction)).sort((a, b) => {
       if (typeof a.place.photo !== 'undefined') {
         if (typeof b.place.photo !== 'undefined') {
           return 0;
@@ -65,7 +59,7 @@ export default {
       return 1;
     });
 
-    appendPlaces(state.places);
+    appendAttractions(state.attractions);
   },
   displayPlacesByFilter(category) {
     const $placeResults = $(DOM.placeResults);
@@ -77,7 +71,7 @@ export default {
       $placeResults.empty();
     }
 
-    appendPlaces(placesToShow);
+    appendAttractions(placesToShow);
   },
   getMap($place) {
     return state.places.find(place => place.$element.is($place)).map;

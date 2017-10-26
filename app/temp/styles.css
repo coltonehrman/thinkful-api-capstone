@@ -560,12 +560,17 @@ html, body {
   @media screen and (min-width: 600px) {
     .place-result, .no-results {
       padding: 15px 10px; } }
+  .place-result:hover, .no-results:hover {
+    background-color: rgba(148, 187, 207, 0.75); }
 
 .place-result:last-of-type, .no-results {
   border: 0; }
 
-.place__header {
-  background-color: #fff;
+.no-results:hover {
+  background-color: transparent; }
+
+.header-bar {
+  background-color: #2B2D42;
   font-size: 1rem;
   padding: 25px 50px;
   display: -webkit-box;
@@ -577,14 +582,15 @@ html, body {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between; }
-  .place__header .back-btn {
+  .header-bar__logo {
+    font-weight: 300;
+    margin: 0; }
+  .header-bar .back-btn {
     background-color: transparent;
-    border: 0; }
-    .place__header .back-btn > i {
+    border: 0;
+    color: #fff; }
+    .header-bar .back-btn > i {
       font-size: 2rem; }
-
-.place__name {
-  margin: 0; }
 
 .place__item .card {
   background-color: #fff;

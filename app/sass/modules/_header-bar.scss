@@ -1,0 +1,23 @@
+.header-bar {
+  background-color: $dark;
+  font-size: 1rem;
+  padding: 25px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__logo {
+    font-weight: 300;
+    margin: 0;
+  }
+
+  & .back-btn {
+    background-color: transparent;
+    border: 0;
+    color: #fff;
+    
+    & > i {
+      font-size: 2rem;
+    }
+  }
+}

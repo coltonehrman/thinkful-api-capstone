@@ -82,13 +82,13 @@
 	    var placeId = $place.data('place-id').trim();
 
 	    _UIController2.default.Search.clear();
-	    _UIController2.default.Place.setPlaceName(name);
+	    _UIController2.default.Place.setLogo(name);
 	    _UIController2.default.Screen.goTo(_UIController.DOM.placeScreen);
 
 	    (0, _google.getLatLong)(placeId).then(function (loc) {
 	      _AttractionsController2.default.findAttractions(loc).then(function (attractions) {
-	        _UIController2.default.Place.toggleProgress();
-	        _UIController2.default.Place.displayPlaces(attractions);
+	        // UIController.Place.toggleProgress();
+	        _UIController2.default.Place.displayAttractions(attractions);
 	      });
 	    });
 	  });
@@ -262,7 +262,6 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	/* global $ */
 	exports.DOM = _DOM2.default;
 	exports.default = {
 	  Screen: _Screen2.default,
@@ -284,17 +283,17 @@
 	  homeScreen: '.home.screen',
 	  placeScreen: '.place.screen',
 	  backButton: '.back-btn',
-	  progressBar: '.progress',
 	  categoryContainer: '.place__categories',
 	  categories: '.place__category',
 	  googleMapActivator: '.activator',
 	  noResults: '.no-results',
+	  headerLogo: '.header-bar__logo',
 	  place: '.place__item',
-	  placeName: '.place__name',
 	  placeSearch: '.place-search',
 	  placeResults: '.place-results',
 	  placeResult: '.place-result',
-	  placeRating: '.place__rating'
+	  placeRating: '.place__rating',
+	  attractions: '.attractions'
 	};
 
 	exports.default = DOM;
@@ -384,9 +383,9 @@
 
 	var _DOM2 = _interopRequireDefault(_DOM);
 
-	var _Place = __webpack_require__(11);
+	var _Attraction = __webpack_require__(11);
 
-	var _Place2 = _interopRequireDefault(_Place);
+	var _Attraction2 = _interopRequireDefault(_Attraction);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -403,20 +402,14 @@
 	  }
 	}
 
-	function setPlaceName(name) {
-	  $(_DOM2.default.placeName).text(name);
+	function setLogo(text) {
+	  $(_DOM2.default.headerLogo).text(text);
 	}
 
-	function appendPlaces(places) {
-	  var $placeResults = $(_DOM2.default.placeResults);
-	  places.forEach(function (place, i) {
-	    if (i % 2 === 0) {
-	      var $row = $('<div class="row"></div>');
-	      $row.append(place.$element);
-	      $placeResults.append($row);
-	    } else {
-	      $placeResults.find('.row').last().append(place.$element);
-	    }
+	function appendAttractions(attractions) {
+	  var $attractions = $(_DOM2.default.attractions);
+	  attractions.forEach(function (attraction) {
+	    return $attractions.append(attraction.$element);
 	  });
 	}
 
@@ -429,14 +422,14 @@
 	}
 
 	exports.default = {
-	  setPlaceName: setPlaceName,
+	  setLogo: setLogo,
 	  toggleProgress: toggleProgress,
-	  displayPlaces: function displayPlaces(places) {
-	    var placeCategories = places.map(function (place) {
-	      return place.category;
+	  displayAttractions: function displayAttractions(attractions) {
+	    var attractionCategories = attractions.map(function (attraction) {
+	      return attraction.category;
 	    });
-	    var categories = placeCategories.filter(function (cat, i) {
-	      return placeCategories.indexOf(cat) === i;
+	    var categories = attractionCategories.filter(function (cat, i) {
+	      return attractionCategories.indexOf(cat) === i;
 	    });
 
 	    clearCategories();
@@ -445,8 +438,8 @@
 	      return $(_DOM2.default.categoryContainer).append('<a class="' + _DOM2.default.categories.slice(1) + ' waves-effect btn-flat btn">' + cat + '</a>');
 	    });
 
-	    _state2.default.places = places.map(function (place) {
-	      return new _Place2.default(place);
+	    _state2.default.attractions = attractions.map(function (attraction) {
+	      return new _Attraction2.default(attraction);
 	    }).sort(function (a, b) {
 	      if (typeof a.place.photo !== 'undefined') {
 	        if (typeof b.place.photo !== 'undefined') {
@@ -457,7 +450,7 @@
 	      return 1;
 	    });
 
-	    appendPlaces(_state2.default.places);
+	    appendAttractions(_state2.default.attractions);
 	  },
 	  displayPlacesByFilter: function displayPlacesByFilter(category) {
 	    var $placeResults = $(_DOM2.default.placeResults);
@@ -469,7 +462,7 @@
 	      $placeResults.empty();
 	    }
 
-	    appendPlaces(placesToShow);
+	    appendAttractions(placesToShow);
 	  },
 	  getMap: function getMap($place) {
 	    return _state2.default.places.find(function (place) {
@@ -498,7 +491,7 @@
 	  value: true
 	});
 	exports.default = {
-	  places: []
+	  attractions: []
 	};
 
 /***/ }),
@@ -518,9 +511,9 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var Place = function () {
-	  function Place(place) {
-	    _classCallCheck(this, Place);
+	var Attraction = function () {
+	  function Attraction(place) {
+	    _classCallCheck(this, Attraction);
 
 	    this.place = place;
 	    this.$element = this.createElement();
@@ -529,7 +522,7 @@
 	    this.marker = null;
 	  }
 
-	  _createClass(Place, [{
+	  _createClass(Attraction, [{
 	    key: 'createMap',
 	    value: function createMap() {
 	      if (!this.map) {
@@ -591,10 +584,10 @@
 	    }
 	  }]);
 
-	  return Place;
+	  return Attraction;
 	}();
 
-	exports.default = Place;
+	exports.default = Attraction;
 
 /***/ }),
 /* 12 */
@@ -623,39 +616,39 @@
 	  }).join(' ');
 	}
 
-	function parsePlace(place) {
+	function parseAttraction(attraction) {
 	  var data = {};
 
-	  data.name = place.venue.name;
+	  data.name = attraction.venue.name;
 
-	  place.venue.categories.forEach(function (category) {
+	  attraction.venue.categories.forEach(function (category) {
 	    data.icon = parseIcon(32, category.icon);
 	    data.category = parseCategory(data.icon);
 	  });
 
-	  if (typeof place.venue.hours !== 'undefined') {
-	    data.open = place.venue.hours.isOpen;
-	    data.hours = place.venue.hours.status;
+	  if (typeof attraction.venue.hours !== 'undefined') {
+	    data.open = attraction.venue.hours.isOpen;
+	    data.hours = attraction.venue.hours.status;
 	  }
 
-	  if (typeof place.venue.location !== 'undefined') {
-	    data.address = place.venue.location.formattedAddress.join(', ');
+	  if (typeof attraction.venue.location !== 'undefined') {
+	    data.address = attraction.venue.location.formattedAddress.join(', ');
 	    data.coords = {
-	      lat: place.venue.location.lat,
-	      lng: place.venue.location.lng
+	      lat: attraction.venue.location.lat,
+	      lng: attraction.venue.location.lng
 	    };
 	  }
 
-	  if (place.venue.photos.count !== 0) {
-	    data.photo = parsePhoto('500x300', place.venue.photos.groups[0].items[0]);
+	  if (attraction.venue.photos.count !== 0) {
+	    data.photo = parsePhoto('500x300', attraction.venue.photos.groups[0].items[0]);
 	  }
 
-	  if (typeof place.venue.price !== 'undefined') {
-	    data.price = place.venue.price.currency.repeat(place.venue.price.tier);
+	  if (typeof attraction.venue.price !== 'undefined') {
+	    data.price = attraction.venue.price.currency.repeat(attraction.venue.price.tier);
 	  }
 
-	  if (typeof place.venue.rating !== 'undefined') {
-	    data.rating = place.venue.rating;
+	  if (typeof attraction.venue.rating !== 'undefined') {
+	    data.rating = attraction.venue.rating;
 	  }
 
 	  return data;
@@ -665,15 +658,15 @@
 	  findAttractions: function findAttractions(coords) {
 	    return new Promise(function (resolve) {
 	      (0, _attractions.getAttractions)(coords).then(function (res) {
-	        var places = [];
+	        var attractions = [];
 
 	        res.groups.forEach(function (group) {
-	          group.items.forEach(function (place) {
-	            places.push(parsePlace(place));
+	          group.items.forEach(function (attraction) {
+	            attractions.push(parseAttraction(attraction));
 	          });
 	        });
 
-	        resolve(places);
+	        resolve(attractions);
 	      });
 	    });
 	  }

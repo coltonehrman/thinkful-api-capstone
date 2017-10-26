@@ -33,15 +33,15 @@
     </div>
 
     <div class="place screen">
-      <header class="place__header">
-        <p class="place__name brand-logo flow-text left"></p>
-        <button class="back-btn"><i class="large material-icons">replay</i></button>
+      <header class="header-bar">
+        <h1 class="header-bar__logo"></h1>
+        <button class="back-btn">
+          <i class="large material-icons">replay</i>
+        </button>
       </header>
 
-      <div class="container">
-        <div class="place__categories"></div>
-        <div class="place__results row"></div>
-      </div>
+      <div class="place__categories"></div>
+      <div class="attractions"></div>
     </div>
 
     <!-- Import Google Places API -->
@@ -50,10 +50,6 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 
     <script src="lib/jquery.barrating.min.js"></script>
-
-    <!-- build:js lib/materialize.js -->
-    <script src="lib/materialize.js"></script>
-    <!-- endbuild -->
 
     <!-- build:js js/app.js -->
     <script src="/temp/app.js"></script>
