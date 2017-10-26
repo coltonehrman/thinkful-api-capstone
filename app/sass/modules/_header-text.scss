@@ -1,0 +1,25 @@
+.header-text {
+  font-size: 2rem;
+  font-weight: normal;
+  margin-bottom: 10px;
+  text-align: center;
+
+  @media screen and (min-width: 450px) {
+    font-size: 2.5rem;
+  }
+
+  @media screen and (min-width: 600px) {
+    font-size: 3rem;
+  }
+
+  &__subtext {
+    font-size: 1rem;
+    font-weight: 300;
+    margin-top: 0;
+    text-align: center;
+
+    @media screen and (min-width: 600px) {
+      font-size: 1.25rem;
+    }
+  }
+}

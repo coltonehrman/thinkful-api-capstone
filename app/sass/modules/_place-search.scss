@@ -1,0 +1,32 @@
+.place-search {
+  align-self: center;
+  background-color: rgba(#94bbcf, 0.75);
+  border: 1px solid #fff;
+  color: #fff;
+  display: block;
+  padding: 10px;
+  font-size: 1rem;
+  font-weight: 300;
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 25px;
+  width: 85%;
+  max-width: 700px;
+
+  @media screen and (min-width: 600px) {
+    padding: 15px 10px;
+  }
+
+  @media screen and (min-width: 970px) {
+    margin-top: 75px;
+    margin-bottom: 35px;
+  }
+
+  &::placeholder {
+    color: #fff;
+  }
+
+  &:focus {
+    outline: 0;
+  }
+}
