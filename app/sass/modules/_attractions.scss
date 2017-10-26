@@ -1,3 +1,18 @@
 .attractions {
-  
+  column-count: 2;
+  margin: 0 auto;
+  margin-bottom: 50px;
+  max-width: 960px;
+  width: 100%;
+}
+
+.attraction {
+  display: inline-block;
+  overflow: hidden;
+  margin: 25px 0;
+
+  &__container {
+    border-radius: 3px;
+    background-color: #fff;
+  }
 }

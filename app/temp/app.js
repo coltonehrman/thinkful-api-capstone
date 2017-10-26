@@ -282,18 +282,18 @@
 	  screens: '.screen',
 	  homeScreen: '.home.screen',
 	  placeScreen: '.place.screen',
-	  backButton: '.back-btn',
-	  categoryContainer: '.place__categories',
-	  categories: '.place__category',
-	  googleMapActivator: '.activator',
-	  noResults: '.no-results',
 	  headerLogo: '.header-bar__logo',
-	  place: '.place__item',
+	  backButton: '.back-btn',
 	  placeSearch: '.place-search',
 	  placeResults: '.place-results',
+	  noResults: '.no-results',
 	  placeResult: '.place-result',
 	  placeRating: '.place__rating',
-	  attractions: '.attractions'
+	  categories: '.categories',
+	  category: '.category',
+	  attractions: '.attractions',
+	  attraction: '.attraction',
+	  googleMapActivator: '.activator'
 	};
 
 	exports.default = DOM;
@@ -414,11 +414,11 @@
 	}
 
 	function clearCategories() {
-	  $(_DOM2.default.categories).remove();
+	  $(_DOM2.default.category).remove();
 	}
 
-	function clearPlaces() {
-	  $(_DOM2.default.placeResults).empty();
+	function clearPlaceResults() {
+	  $(_DOM2.default.placeResult).remove();
 	}
 
 	exports.default = {
@@ -434,8 +434,10 @@
 
 	    clearCategories();
 
+	    $(_DOM2.default.categories).append('<li class="' + _DOM2.default.category.slice(1) + ' active">All</li>');
+
 	    categories.forEach(function (cat) {
-	      return $(_DOM2.default.categoryContainer).append('<a class="' + _DOM2.default.categories.slice(1) + ' waves-effect btn-flat btn">' + cat + '</a>');
+	      return $(_DOM2.default.categories).append('<li class="' + _DOM2.default.category.slice(1) + ' waves-effect btn-flat btn">' + cat + '</li>');
 	    });
 
 	    _state2.default.attractions = attractions.map(function (attraction) {
@@ -477,7 +479,7 @@
 	  reset: function reset() {
 	    toggleProgress();
 	    clearCategories();
-	    clearPlaces();
+	    clearPlaceResults();
 	  }
 	};
 
@@ -557,26 +559,26 @@
 	  }, {
 	    key: 'createElement',
 	    value: function createElement() {
-	      var html = '\n      <div class="place__item col s12 m6">\n        <div class="card">';
+	      var html = '\n      <div class="' + _UIController.DOM.attraction.slice(1) + '">\n        <div class="' + _UIController.DOM.attraction.slice(1) + '__container">';
 	      if (typeof this.place.photo !== 'undefined') {
-	        html += '\n          <div class="card-image waves-effect waves-block waves-light">\n            <img class="activator" src="' + this.place.photo + '">\n          </div>';
+	        html += '\n            <div class="card-image waves-effect waves-block waves-light">\n              <img class="activator" src="' + this.place.photo + '">\n            </div>';
 	      }
-	      html += '\n          <div class="card-content grey-text">\n            <div class="card-title">\n              <i class="activator material-icons small right">location_on</i></span>\n              <div class="chip right">\n                <img src="' + this.place.icon + '" alt="Contact Person">\n                ' + this.place.category + '\n              </div>\n              ' + this.place.name;
+	      html += '\n            <div class="card-content grey-text">\n              <div class="card-title">\n                <i class="activator material-icons small right">location_on</i></span>\n                <div class="chip right">\n                  <img src="' + this.place.icon + '" alt="Contact Person">\n                  ' + this.place.category + '\n                </div>\n                ' + this.place.name;
 	      if (typeof this.place.hours !== 'undefined') {
-	        html += '\n              <p class="place__hours">' + this.place.hours + '</p>';
+	        html += '\n                <p class="place__hours">' + this.place.hours + '</p>';
 	      }
-	      html += '\n            </div>\n            <blockquote>' + this.place.address.split(', ').join('<br>') + '</blockquote>';
+	      html += '\n              </div>\n              <blockquote>' + this.place.address.split(', ').join('<br>') + '</blockquote>';
 
-	      html += '\n            </div>\n            <div class="card-reveal">\n              <span class="card-title grey-text">' + this.place.name + '<i class="material-icons right">close</i></span>\n              <div class="map"></div>\n            </div>';
+	      html += '\n              </div>\n              <div class="card-reveal">\n                <span class="card-title grey-text">' + this.place.name + '<i class="material-icons right">close</i></span>\n                <div class="map"></div>\n              </div>';
 	      if (typeof this.place.price !== 'undefined' || typeof this.place.rating !== 'undefined') {
-	        html += '\n          <div class="card-action">';
+	        html += '\n            <div class="card-action">';
 	        if (typeof this.place.price !== 'undefined') {
-	          html += '\n              <p class="place__price place__price--' + this.place.price.length + ' right btn-floating red">' + this.place.price + '</p>';
+	          html += '\n                <p class="place__price place__price--' + this.place.price.length + ' right btn-floating red">' + this.place.price + '</p>';
 	        }
 	        if (typeof this.place.rating !== 'undefined') {
-	          html += '\n              <select class="place__rating" name="rating" data-current-rating="' + this.place.rating + '">\n                <option value="1">1</option>\n                <option value="2">2</option>\n                <option value="3">3</option>\n                <option value="4">4</option>\n                <option value="5">5</option>\n              </select>';
+	          html += '\n                <select class="place__rating" name="rating" data-current-rating="' + this.place.rating + '">\n                  <option value="1">1</option>\n                  <option value="2">2</option>\n                  <option value="3">3</option>\n                  <option value="4">4</option>\n                  <option value="5">5</option>\n                </select>';
 	        }
-	        html += '\n          </div>';
+	        html += '\n            </div>';
 	      }
 	      html += '\n        </div>\n      </div>';
 

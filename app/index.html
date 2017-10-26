@@ -28,19 +28,24 @@
       
       <input class="place-search" type="search" placeholder="Ex. Las Vegas, Houston">
       <ul class="place-results">
-        <li class="no-results">No Results...</li>
+        <li class="no-results">No Results</li>
       </ul>
     </div>
 
     <div class="place screen">
       <header class="header-bar">
-        <h1 class="header-bar__logo"></h1>
-        <button class="back-btn">
-          <i class="large material-icons">replay</i>
-        </button>
+        <section class="header-bar__content">
+          <h1 class="header-bar__logo"></h1>
+          <button class="back-btn">
+            <i class="large material-icons">replay</i>
+          </button>
+        </section>
       </header>
 
-      <div class="place__categories"></div>
+      <div class="categories__container">
+        <ul class="categories"></ul>
+      </div>
+      
       <div class="attractions"></div>
     </div>
 

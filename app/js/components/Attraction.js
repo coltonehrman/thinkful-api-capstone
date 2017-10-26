@@ -45,58 +45,58 @@ export default class Attraction {
 
   createElement() {
     let html = `
-      <div class="place__item col s12 m6">
-        <div class="card">`;
-    if (typeof this.place.photo !== 'undefined') {
-      html += `
-          <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="${this.place.photo}">
-          </div>`;
-    }
-    html += `
-          <div class="card-content grey-text">
-            <div class="card-title">
-              <i class="activator material-icons small right">location_on</i></span>
-              <div class="chip right">
-                <img src="${this.place.icon}" alt="Contact Person">
-                ${this.place.category}
-              </div>
-              ${this.place.name}`;
-    if (typeof this.place.hours !== 'undefined') {
-      html += `
-              <p class="place__hours">${this.place.hours}</p>`;
-    }
-    html += `
-            </div>
-            <blockquote>${this.place.address.split(', ').join('<br>')}</blockquote>`;
-
-    html += `
-            </div>
-            <div class="card-reveal">
-              <span class="card-title grey-text">${this.place.name}<i class="material-icons right">close</i></span>
-              <div class="map"></div>
+      <div class="${DOM.attraction.slice(1)}">
+        <div class="${DOM.attraction.slice(1)}__container">`;
+      if (typeof this.place.photo !== 'undefined') {
+        html += `
+            <div class="card-image waves-effect waves-block waves-light">
+              <img class="activator" src="${this.place.photo}">
             </div>`;
-    if (typeof this.place.price !== 'undefined' || typeof this.place.rating !== 'undefined') {
-      html += `
-          <div class="card-action">`;
-      if (typeof this.place.price !== 'undefined') {
-        html += `
-              <p class="place__price place__price--${this.place.price.length} right btn-floating red">${this.place.price}</p>`;
-      }
-      if (typeof this.place.rating !== 'undefined') {
-        html += `
-              <select class="place__rating" name="rating" data-current-rating="${this.place.rating}">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>`;
       }
       html += `
-          </div>`;
-    }
-    html += `
+            <div class="card-content grey-text">
+              <div class="card-title">
+                <i class="activator material-icons small right">location_on</i></span>
+                <div class="chip right">
+                  <img src="${this.place.icon}" alt="Contact Person">
+                  ${this.place.category}
+                </div>
+                ${this.place.name}`;
+      if (typeof this.place.hours !== 'undefined') {
+        html += `
+                <p class="place__hours">${this.place.hours}</p>`;
+      }
+      html += `
+              </div>
+              <blockquote>${this.place.address.split(', ').join('<br>')}</blockquote>`;
+
+      html += `
+              </div>
+              <div class="card-reveal">
+                <span class="card-title grey-text">${this.place.name}<i class="material-icons right">close</i></span>
+                <div class="map"></div>
+              </div>`;
+      if (typeof this.place.price !== 'undefined' || typeof this.place.rating !== 'undefined') {
+        html += `
+            <div class="card-action">`;
+        if (typeof this.place.price !== 'undefined') {
+          html += `
+                <p class="place__price place__price--${this.place.price.length} right btn-floating red">${this.place.price}</p>`;
+        }
+        if (typeof this.place.rating !== 'undefined') {
+          html += `
+                <select class="place__rating" name="rating" data-current-rating="${this.place.rating}">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>`;
+        }
+        html += `
+            </div>`;
+      }
+      html += `
         </div>
       </div>`;
 

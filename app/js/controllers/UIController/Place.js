@@ -27,11 +27,11 @@ function appendAttractions(attractions) {
 }
 
 function clearCategories() {
-  $(DOM.categories).remove();
+  $(DOM.category).remove();
 }
 
-function clearPlaces() {
-  $(DOM.placeResults).empty();
+function clearPlaceResults() {
+  $(DOM.placeResult).remove();
 }
 
 export default {
@@ -45,8 +45,12 @@ export default {
 
     clearCategories();
 
-    categories.forEach(cat => $(DOM.categoryContainer).append(
-      `<a class="${DOM.categories.slice(1)} waves-effect btn-flat btn">${cat}</a>`,
+    $(DOM.categories).append(
+      `<li class="${DOM.category.slice(1)} active">All</li>`
+    );
+
+    categories.forEach(cat => $(DOM.categories).append(
+      `<li class="${DOM.category.slice(1)} waves-effect btn-flat btn">${cat}</li>`,
     ));
 
     state.attractions = attractions.map(attraction => new Attraction(attraction)).sort((a, b) => {
@@ -82,6 +86,6 @@ export default {
   reset() {
     toggleProgress();
     clearCategories();
-    clearPlaces();
+    clearPlaceResults();
   },
 };

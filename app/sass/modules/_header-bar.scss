@@ -1,10 +1,16 @@
 .header-bar {
-  background-color: $dark;
+  background-color: rgba($blue, 0.75);
   font-size: 1rem;
   padding: 25px 50px;
-  display: flex;
   align-items: center;
-  justify-content: space-between;
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 960px;
+    width: 100%;
+  }
 
   &__logo {
     font-weight: 300;
