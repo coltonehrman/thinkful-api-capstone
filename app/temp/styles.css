@@ -661,6 +661,7 @@ html, body {
   display: inline-block;
   overflow: hidden;
   margin: 25px 2%;
+  position: relative;
   width: 45%; }
   @media screen and (max-width: 650px) {
     .attraction {

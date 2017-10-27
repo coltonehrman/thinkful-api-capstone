@@ -67,12 +67,7 @@
 	    if (search === '') {
 	      _UIController2.default.Search.clearResults();
 	    } else {
-	      _UIController2.default.Search.clearResults();
-	      (0, _google.autocomplete)(search).then(function (results) {
-	        return _UIController2.default.Search.displayResults(results);
-	      }).catch(function () {
-	        return _UIController2.default.Search.clearResults();
-	      });
+	      (0, _google.autocomplete)(search).then(_UIController2.default.Search.displayResults).catch(_UIController2.default.Search.clearResults);
 	    }
 	  });
 
@@ -109,9 +104,8 @@
 	  });
 
 	  $(document).on('click', _UIController.DOM.googleMapActivator, function (e) {
-	    var $place = $(e.target).parents(_UIController.DOM.place);
-	    _UIController2.default.Place.showMap($place);
-	    window.currentMap = _UIController2.default.Place.getMap($place);
+	    var $attraction = $(e.target).parents(_UIController.DOM.place);
+	    _UIController2.default.Place.showMap($attraction);
 	  });
 	} /* global window $ document */
 
@@ -351,12 +345,11 @@
 	  displayResults: function displayResults(results) {
 	    var $placeResults = $(_DOM2.default.placeResults);
 	    $(_DOM2.default.noResults).hide();
+	    $(_DOM2.default.placeResult).remove();
 
-	    results.forEach(function (result) {
+	    results.slice(0, 5).forEach(function (result) {
 	      $placeResults.append('<li class="' + _DOM2.default.placeResult.slice(1) + '" data-place-id="' + result.id + '">\n          ' + result.name + '\n        </li>');
 	    });
-
-	    $placeResults.show();
 	  },
 	  clear: function clear() {
 	    $(_DOM2.default.placeSearch).val('');
@@ -462,14 +455,14 @@
 	    $attractions.remove();
 	    appendAttractions(attractionsToShow);
 	  },
-	  getMap: function getMap($place) {
-	    return _state2.default.places.find(function (place) {
-	      return place.$element.is($place);
+	  getMap: function getMap($attraction) {
+	    return _state2.default.attractions.find(function (attraction) {
+	      return attraction.$element.is($attraction);
 	    }).map;
 	  },
-	  showMap: function showMap($place) {
-	    _state2.default.places.find(function (place) {
-	      return place.$element.is($place);
+	  showMap: function showMap($attraction) {
+	    _state2.default.attractions.find(function (attraction) {
+	      return attraction.$element.is($attraction);
 	    }).createMap();
 	  },
 	  reset: function reset() {
@@ -540,8 +533,20 @@
 
 	        google.maps.event.addListener(map, 'idle', function () {
 	          map.setCenter(coords);
+	          google.maps.event.trigger(map, 'resize');
 	        });
 	      }
+
+	      this.showMap();
+	    }
+	  }, {
+	    key: 'showMap',
+	    value: function showMap() {
+	      var $map = this.$element.find('.map');
+
+	      $map.css({
+	        position: 'absolute'
+	      });
 	    }
 	  }, {
 	    key: 'createRating',

@@ -30,8 +30,19 @@ export default class Attraction {
 
       google.maps.event.addListener(map, 'idle', () => {
         map.setCenter(coords);
+        google.maps.event.trigger(map, 'resize');
       });
     }
+
+    this.showMap();
+  }
+
+  showMap() {
+    const $map = this.$element.find('.map');
+
+    $map.css({
+      position: 'absolute',
+    });
   }
 
   createRating() {

@@ -14,16 +14,15 @@ export default {
   displayResults(results) {
     const $placeResults = $(DOM.placeResults);
     $(DOM.noResults).hide();
+    $(DOM.placeResult).remove();
 
-    results.forEach((result) => {
+    results.slice(0, 5).forEach((result) => {
       $placeResults.append(
         `<li class="${DOM.placeResult.slice(1)}" data-place-id="${result.id}">
           ${result.name}
         </li>`,
       );
     });
-
-    $placeResults.show();
   },
   clear() {
     $(DOM.placeSearch).val('');

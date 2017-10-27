@@ -74,11 +74,11 @@ export default {
     $attractions.remove();
     appendAttractions(attractionsToShow);
   },
-  getMap($place) {
-    return state.places.find(place => place.$element.is($place)).map;
+  getMap($attraction) {
+    return state.attractions.find(attraction => attraction.$element.is($attraction)).map;
   },
-  showMap($place) {
-    state.places.find(place => place.$element.is($place)).createMap();
+  showMap($attraction) {
+    state.attractions.find(attraction => attraction.$element.is($attraction)).createMap();
   },
   reset() {
     toggleProgress();

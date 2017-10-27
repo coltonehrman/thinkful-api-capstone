@@ -12,12 +12,9 @@ function setupEventListeners() {
     if (search === '') {
       UIController.Search.clearResults();
     } else {
-      UIController.Search.clearResults();
-      autocomplete(search).then(results =>
-        UIController.Search.displayResults(results),
-      ).catch(() =>
-        UIController.Search.clearResults(),
-      );
+      autocomplete(search)
+        .then(UIController.Search.displayResults)
+        .catch(UIController.Search.clearResults);
     }
   });
 
@@ -54,9 +51,8 @@ function setupEventListeners() {
   });
 
   $(document).on('click', DOM.googleMapActivator, (e) => {
-    const $place = $(e.target).parents(DOM.place);
-    UIController.Place.showMap($place);
-    window.currentMap = UIController.Place.getMap($place);
+    const $attraction = $(e.target).parents(DOM.place);
+    UIController.Place.showMap($attraction);
   });
 }
 
