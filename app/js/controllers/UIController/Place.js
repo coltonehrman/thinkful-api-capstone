@@ -45,12 +45,10 @@ export default {
 
     clearCategories();
 
-    $(DOM.categories).append(
-      `<li class="${DOM.category.slice(1)} active">All</li>`
-    );
+    $(DOM.categories).append(`<li class="${DOM.category.slice(1)} active">All</li>`);
 
     categories.forEach(cat => $(DOM.categories).append(
-      `<li class="${DOM.category.slice(1)} waves-effect btn-flat btn">${cat}</li>`,
+      `<li class="${DOM.category.slice(1)}">${cat}</li>`,
     ));
 
     state.attractions = attractions.map(attraction => new Attraction(attraction)).sort((a, b) => {

@@ -2,12 +2,11 @@
   margin: 0 auto;
   margin-bottom: 50px;
   max-width: 960px;
-  overflow: auto;
   width: 100%;
 
-  &::after {
-    content: '';
-    display: table-cell;
+  &:after {
+    content: "";
+    display: table;
     clear: both;
   }
 }
@@ -17,7 +16,6 @@
   box-shadow: 0 1px 10px 1px rgba(#000, 0.25);
   color: $blue;
   display: inline-block;
-  float: left;
   overflow: hidden;
   margin: 25px 2%;
   width: 45%;
@@ -75,14 +73,35 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 15px;
+    padding: 15px;
   }
 
   &__price {
     background-color: $blue;
     border-radius: 50%;
     color: #fff;
-    padding: 10px;
+    margin: 0;
+
+    &--1 {
+      padding: 15px 20px;
+    }
+
+    &--2 {
+      padding: 15px;
+    }
+
+    &--3 {
+      padding: 15px 10px;
+    }
+
+    &--4 {
+      padding: 15px 5px;
+    }
+
+    &--empty {
+      background-color: transparent;
+      padding: 24.25px;
+    }
   }
 }
 

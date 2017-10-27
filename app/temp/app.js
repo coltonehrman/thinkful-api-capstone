@@ -436,7 +436,7 @@
 	    $(_DOM2.default.categories).append('<li class="' + _DOM2.default.category.slice(1) + ' active">All</li>');
 
 	    categories.forEach(function (cat) {
-	      return $(_DOM2.default.categories).append('<li class="' + _DOM2.default.category.slice(1) + ' waves-effect btn-flat btn">' + cat + '</li>');
+	      return $(_DOM2.default.categories).append('<li class="' + _DOM2.default.category.slice(1) + '">' + cat + '</li>');
 	    });
 
 	    _state2.default.attractions = attractions.map(function (attraction) {

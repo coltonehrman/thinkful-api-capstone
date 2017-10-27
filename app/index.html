@@ -74,7 +74,12 @@
             <option value="4">4</option>
             <option value="5">5</option>
           </select>
-          <p class="attraction__price">{{price}}</p>
+          {{#price}}
+            <p class="attraction__price attraction__price--{{price.length}}">{{price}}</p>
+          {{/price}}
+          {{^price}}
+            <p class="attraction__price attraction__price--empty"></p>
+          {{/price}}
         </div>
       </div>
     </script>

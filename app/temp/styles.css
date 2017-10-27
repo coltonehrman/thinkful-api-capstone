@@ -648,11 +648,10 @@ html, body {
   margin: 0 auto;
   margin-bottom: 50px;
   max-width: 960px;
-  overflow: auto;
   width: 100%; }
-  .attractions::after {
-    content: '';
-    display: table-cell;
+  .attractions:after {
+    content: "";
+    display: table;
     clear: both; }
 
 .attraction {
@@ -660,7 +659,6 @@ html, body {
   box-shadow: 0 1px 10px 1px rgba(0, 0, 0, 0.25);
   color: #94bbcf;
   display: inline-block;
-  float: left;
   overflow: hidden;
   margin: 25px 2%;
   width: 45%; }
@@ -708,12 +706,23 @@ html, body {
     -webkit-box-pack: justify;
         -ms-flex-pack: justify;
             justify-content: space-between;
-    padding: 0 15px; }
+    padding: 15px; }
   .attraction__price {
     background-color: #94bbcf;
     border-radius: 50%;
     color: #fff;
-    padding: 10px; }
+    margin: 0; }
+    .attraction__price--1 {
+      padding: 15px 20px; }
+    .attraction__price--2 {
+      padding: 15px; }
+    .attraction__price--3 {
+      padding: 15px 10px; }
+    .attraction__price--4 {
+      padding: 15px 5px; }
+    .attraction__price--empty {
+      background-color: transparent;
+      padding: 24.25px; }
 
 .br-theme-fontawesome-stars-o .br-widget a.br-selected:after,
 .br-theme-fontawesome-stars-o .br-widget a.br-fractional:after {
