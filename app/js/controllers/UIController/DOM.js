@@ -8,11 +8,11 @@ const DOM = {
   placeResults: '.place-results',
   noResults: '.no-results',
   placeResult: '.place-result',
-  placeRating: '.place__rating',
   categories: '.categories',
   category: '.category',
   attractions: '.attractions',
   attraction: '.attraction',
+  attractionRating: '.attraction__rating',
   googleMapActivator: '.activator',
 };
 

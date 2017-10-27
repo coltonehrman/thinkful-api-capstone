@@ -7,12 +7,70 @@
 }
 
 .attraction {
+  background-color: #fff;
+  box-shadow: 0 1px 10px 1px rgba(#000, 0.25);
+  color: $blue;
   display: inline-block;
   overflow: hidden;
   margin: 25px 0;
 
-  &__container {
-    border-radius: 3px;
-    background-color: #fff;
+  &__image {
+    border-bottom: 5px solid $blue;
+    font-size: 0;
   }
+
+  &__content {
+    padding: 25px 35px;
+    position: relative;
+  }
+
+  &__header {
+    position: relative;
+    text-align: center;
+
+    & > h2 {
+      margin: 0;
+    }
+  }
+
+  &__category {
+    border-radius: 3px;
+    background-color: $blue;
+    color: #fff;
+    font-weight: 300;
+    padding: 5px 15px;
+    position: absolute;
+    top: 0;
+  }
+
+  &__address {
+    padding: 35px 25px;
+    padding-bottom: 0;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  &__footer {
+    border-top: 5px solid $blue;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+  }
+
+  &__price {
+    background-color: $blue;
+    border-radius: 50%;
+    color: #fff;
+    padding: 10px;
+  }
+}
+
+.br-theme-fontawesome-stars-o .br-widget a.br-selected:after,
+.br-theme-fontawesome-stars-o .br-widget a.br-fractional:after {
+  color: $blue;
+}
+
+.br-theme-fontawesome-stars-o .br-widget a {
+  font-size: 32px;
 }

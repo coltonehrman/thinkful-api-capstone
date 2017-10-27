@@ -49,6 +49,36 @@
       <div class="attractions"></div>
     </div>
 
+    <script id="attraction-template" type="text/babel">
+      <div class="attraction">
+        <div class="attraction__image">
+          <img src="{{photo}}">
+        </div>
+
+        <div class="attraction__content">
+          <div class="attraction__header">
+            <div class="attraction__category">{{category}}</div>
+            <h2>{{name}}</h2>
+          </div>
+
+          <div class="attraction__address">
+            <p>{{{address}}}</p>
+          </div>
+        </div>
+
+        <div class="attraction__footer">
+          <select class="attraction__rating" name="rating" data-current-rating="{{rating}}">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          <p class="attraction__price">{{price}}</p>
+        </div>
+      </div>
+    </script>
+
     <!-- Import Google Places API -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYlbzHkh8NuvIE8NVPdu0K5vgraQuoZbo&libraries=places"></script>
     <!-- Import jQuery -->
