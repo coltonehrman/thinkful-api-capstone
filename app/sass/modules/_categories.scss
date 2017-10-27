@@ -3,6 +3,7 @@
   display: inline-block;
   overflow: auto;
   margin: 35px 0;
+  margin-bottom: 0;
 
   &__container {
     text-align: center;
@@ -22,7 +23,15 @@
   font-weight: 100;
   padding: 5px 25px;
   margin: 0 15px;
+  margin-bottom: 10px;
   text-transform: uppercase;
+
+  @media screen and (max-width: 650px) {
+    font-size: 0.75rem;
+    margin: 0 5px;
+    margin-bottom: 10px;
+    padding: 5px 15px;
+  }
 
   &:hover {
     padding: 5px 25px;
@@ -31,6 +40,6 @@
 
   &.active {
     padding: 5px 25px;
-    background-color: $dark;
+    background-color: #2B2D42;
   }
 }

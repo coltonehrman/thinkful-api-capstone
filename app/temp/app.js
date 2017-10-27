@@ -87,20 +87,19 @@
 
 	    (0, _google.getLatLong)(placeId).then(function (loc) {
 	      _AttractionsController2.default.findAttractions(loc).then(function (attractions) {
-	        // UIController.Place.toggleProgress();
 	        _UIController2.default.Place.displayAttractions(attractions);
 	      });
 	    });
 	  });
 
-	  $(document).on('click', _UIController.DOM.categories, function (e) {
-	    var $categories = $(_UIController.DOM.categories);
+	  $(document).on('click', _UIController.DOM.category, function (e) {
+	    var $categories = $(_UIController.DOM.category);
 	    var $target = $(e.target);
 	    var category = $target.text();
 
-	    $categories.addClass('btn-flat');
-	    $target.removeClass('btn-flat');
-	    _UIController2.default.Place.displayPlacesByFilter(category);
+	    $categories.removeClass('active');
+	    $target.addClass('active');
+	    _UIController2.default.Place.displayAttractionsByFilter(category);
 	  });
 
 	  $(_UIController.DOM.backButton).on('click', function () {
@@ -454,17 +453,14 @@
 
 	    appendAttractions(_state2.default.attractions);
 	  },
-	  displayPlacesByFilter: function displayPlacesByFilter(category) {
-	    var $placeResults = $(_DOM2.default.placeResults);
-	    var placesToShow = _state2.default.places.filter(function (place) {
-	      return place.place.category === category;
+	  displayAttractionsByFilter: function displayAttractionsByFilter(category) {
+	    var $attractions = $(_DOM2.default.attraction);
+	    var attractionsToShow = category.toLowerCase() === 'all' ? _state2.default.attractions : _state2.default.attractions.filter(function (attraction) {
+	      return attraction.place.category === category;
 	    });
 
-	    if ($placeResults.children().length >= 1) {
-	      $placeResults.empty();
-	    }
-
-	    appendAttractions(placesToShow);
+	    $attractions.remove();
+	    appendAttractions(attractionsToShow);
 	  },
 	  getMap: function getMap($place) {
 	    return _state2.default.places.find(function (place) {

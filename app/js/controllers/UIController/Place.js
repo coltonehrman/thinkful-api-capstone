@@ -65,17 +65,16 @@ export default {
 
     appendAttractions(state.attractions);
   },
-  displayPlacesByFilter(category) {
-    const $placeResults = $(DOM.placeResults);
-    const placesToShow = state.places.filter(place =>
-      place.place.category === category,
-    );
+  displayAttractionsByFilter(category) {
+    const $attractions = $(DOM.attraction);
+    const attractionsToShow = (category.toLowerCase() === 'all') ?
+      state.attractions :
+      state.attractions.filter(attraction =>
+        attraction.place.category === category,
+      );
 
-    if ($placeResults.children().length >= 1) {
-      $placeResults.empty();
-    }
-
-    appendAttractions(placesToShow);
+    $attractions.remove();
+    appendAttractions(attractionsToShow);
   },
   getMap($place) {
     return state.places.find(place => place.$element.is($place)).map;

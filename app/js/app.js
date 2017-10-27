@@ -32,20 +32,19 @@ function setupEventListeners() {
 
     getLatLong(placeId).then((loc) => {
       AttractionsController.findAttractions(loc).then((attractions) => {
-        // UIController.Place.toggleProgress();
         UIController.Place.displayAttractions(attractions);
       });
     });
   });
 
-  $(document).on('click', DOM.categories, (e) => {
-    const $categories = $(DOM.categories);
+  $(document).on('click', DOM.category, (e) => {
+    const $categories = $(DOM.category);
     const $target = $(e.target);
     const category = $target.text();
 
-    $categories.addClass('btn-flat');
-    $target.removeClass('btn-flat');
-    UIController.Place.displayPlacesByFilter(category);
+    $categories.removeClass('active');
+    $target.addClass('active');
+    UIController.Place.displayAttractionsByFilter(category);
   });
 
   $(DOM.backButton).on('click', () => {
