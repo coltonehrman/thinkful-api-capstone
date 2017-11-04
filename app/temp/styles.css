@@ -483,8 +483,17 @@ html, body {
   width: 100%; }
 
 .screen {
-  display: none;
-  height: 100vh; }
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  transition: all 1s;
+  top: 0; }
+  .screen.hide {
+    opacity: 0;
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%); }
+  .screen.active {
+    opacity: 1; }
   .screen.home {
     background: url("/assets/background.png") 50% 50% no-repeat/cover;
     padding: 50px 0; }
@@ -662,7 +671,15 @@ html, body {
   overflow: hidden;
   margin: 25px 2%;
   position: relative;
-  width: 45%; }
+  width: 45%;
+  opacity: 0;
+  -webkit-transform: scale(0.5);
+          transform: scale(0.5);
+  transition: all ease-in 0.5s; }
+  .attraction.show {
+    opacity: 1;
+    -webkit-transform: scale(1);
+            transform: scale(1); }
   @media screen and (max-width: 650px) {
     .attraction {
       float: none;

@@ -100,8 +100,8 @@
 
 	  $(_UIController.DOM.backButton).on('click', function () {
 	    _UIController2.default.Screen.goTo(_UIController.DOM.homeScreen);
-	    _UIController2.default.Search.focus();
 	    _UIController2.default.Place.reset();
+	    _UIController2.default.Search.focus();
 	  });
 
 	  $(document).on('click', _UIController.DOM.googleMapActivator, function (e) {
@@ -113,7 +113,7 @@
 	    var $attraction = $(e.target).parents(_UIController.DOM.place);
 	    _UIController2.default.Place.closeMap($attraction);
 	  });
-	} /* global window $ document */
+	} /* global $ document */
 
 
 	function init() {
@@ -317,8 +317,8 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function showScreen(selector) {
-	  $(_DOM2.default.screens).hide();
-	  $(selector).show();
+	  $(_DOM2.default.screens + '.active').removeClass('active').addClass('hide');
+	  $(selector).removeClass('hide').addClass('active');
 	} /* global $ */
 	exports.default = {
 	  goTo: function goTo(screen) {
@@ -390,18 +390,9 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var progressVisible = true; /* global $ */
+	var animations = []; /* global $ */
 
-
-	function toggleProgress() {
-	  if (progressVisible) {
-	    progressVisible = false;
-	    $(_DOM2.default.progressBar).hide();
-	  } else {
-	    progressVisible = true;
-	    $(_DOM2.default.progressBar).show();
-	  }
-	}
+	var currentCategory = 'all';
 
 	function setLogo(text) {
 	  $(_DOM2.default.headerLogo).text(text);
@@ -409,8 +400,12 @@
 
 	function appendAttractions(attractions) {
 	  var $attractions = $(_DOM2.default.attractions);
-	  attractions.forEach(function (attraction) {
-	    return $attractions.append(attraction.$element);
+	  attractions.forEach(function (attraction, i) {
+	    $attractions.append(attraction.$element);
+
+	    animations.push(setTimeout(function () {
+	      attraction.$element.addClass('show');
+	    }, 350 * i));
 	  });
 	}
 
@@ -418,13 +413,18 @@
 	  $(_DOM2.default.category).remove();
 	}
 
+	function clearAnimations() {
+	  animations.forEach(clearTimeout);
+	  animations = [];
+	}
+
 	function clearAttractions() {
-	  $(_DOM2.default.attraction).remove();
+	  clearAnimations();
+	  $(_DOM2.default.attraction).removeClass('show').remove();
 	}
 
 	exports.default = {
 	  setLogo: setLogo,
-	  toggleProgress: toggleProgress,
 	  displayAttractions: function displayAttractions(attractions) {
 	    var attractionCategories = attractions.map(function (attraction) {
 	      return attraction.category;
@@ -456,12 +456,17 @@
 	    appendAttractions(_state2.default.attractions);
 	  },
 	  displayAttractionsByFilter: function displayAttractionsByFilter(category) {
-	    var $attractions = $(_DOM2.default.attraction);
-	    var attractionsToShow = category.toLowerCase() === 'all' ? _state2.default.attractions : _state2.default.attractions.filter(function (attraction) {
+	    if (currentCategory === category.toLowerCase()) {
+	      return;
+	    }
+
+	    currentCategory = category.toLowerCase();
+
+	    var attractionsToShow = currentCategory === 'all' ? _state2.default.attractions : _state2.default.attractions.filter(function (attraction) {
 	      return attraction.place.category === category;
 	    });
 
-	    $attractions.remove();
+	    clearAttractions();
 	    appendAttractions(attractionsToShow);
 	  },
 	  getMap: function getMap($attraction) {
@@ -480,7 +485,6 @@
 	    }).closeMap();
 	  },
 	  reset: function reset() {
-	    toggleProgress();
 	    clearCategories();
 	    clearAttractions();
 	  }

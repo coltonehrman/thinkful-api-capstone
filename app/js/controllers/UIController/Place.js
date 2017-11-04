@@ -3,17 +3,8 @@ import state from '../../modules/state';
 import DOM from './DOM';
 import Attraction from '../../components/Attraction';
 
-let progressVisible = true;
-
-function toggleProgress() {
-  if (progressVisible) {
-    progressVisible = false;
-    $(DOM.progressBar).hide();
-  } else {
-    progressVisible = true;
-    $(DOM.progressBar).show();
-  }
-}
+let animations = [];
+let currentCategory = 'all';
 
 function setLogo(text) {
   $(DOM.headerLogo).text(text);
@@ -21,22 +12,31 @@ function setLogo(text) {
 
 function appendAttractions(attractions) {
   const $attractions = $(DOM.attractions);
-  attractions.forEach(attraction => (
-    $attractions.append(attraction.$element)
-  ));
+  attractions.forEach((attraction, i) => {
+    $attractions.append(attraction.$element);
+
+    animations.push(setTimeout(() => {
+      attraction.$element.addClass('show');
+    }, 350 * i));
+  });
 }
 
 function clearCategories() {
   $(DOM.category).remove();
 }
 
+function clearAnimations() {
+  animations.forEach(clearTimeout);
+  animations = [];
+}
+
 function clearAttractions() {
-  $(DOM.attraction).remove();
+  clearAnimations();
+  $(DOM.attraction).removeClass('show').remove();
 }
 
 export default {
   setLogo,
-  toggleProgress,
   displayAttractions(attractions) {
     const attractionCategories = attractions.map(attraction => attraction.category);
     const categories = attractionCategories.filter((cat, i) =>
@@ -64,14 +64,19 @@ export default {
     appendAttractions(state.attractions);
   },
   displayAttractionsByFilter(category) {
-    const $attractions = $(DOM.attraction);
-    const attractionsToShow = (category.toLowerCase() === 'all') ?
+    if (currentCategory === category.toLowerCase()) {
+      return;
+    }
+
+    currentCategory = category.toLowerCase();
+
+    const attractionsToShow = (currentCategory === 'all') ?
       state.attractions :
       state.attractions.filter(attraction =>
         attraction.place.category === category,
       );
 
-    $attractions.remove();
+    clearAttractions();
     appendAttractions(attractionsToShow);
   },
   getMap($attraction) {
@@ -84,7 +89,6 @@ export default {
     state.attractions.find(attraction => attraction.$element.is($attraction)).closeMap();
   },
   reset() {
-    toggleProgress();
     clearCategories();
     clearAttractions();
   },

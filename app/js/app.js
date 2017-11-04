@@ -1,4 +1,4 @@
-/* global window $ document */
+/* global $ document */
 import { autocomplete, getLatLong } from './lib/google';
 import UIController, { DOM } from './controllers/UIController';
 import AttractionsController from './controllers/AttractionsController';
@@ -47,8 +47,8 @@ function setupEventListeners() {
 
   $(DOM.backButton).on('click', () => {
     UIController.Screen.goTo(DOM.homeScreen);
-    UIController.Search.focus();
     UIController.Place.reset();
+    UIController.Search.focus();
   });
 
   $(document).on('click', DOM.googleMapActivator, (e) => {
