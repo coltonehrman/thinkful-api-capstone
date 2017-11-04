@@ -1,7 +1,7 @@
 const gulp = require('gulp');
 const browserSync = require('browser-sync').create();
 
-gulp.task('dev', ['sass', 'scripts'], () => {
+gulp.task('dev', ['sass', 'scripts', 'copy'], () => {
   browserSync.init({
     notify: true,
     server: {
@@ -24,4 +24,9 @@ gulp.task('injectCss', ['sass'], () => (
 
 gulp.task('reloadScripts', ['scripts'], () => {
   browserSync.reload();
+});
+
+gulp.task('copy', () => {
+  gulp.src('./app/assets/**/*')
+    .pipe(gulp.dest('./app/temp/assets/'));
 });
