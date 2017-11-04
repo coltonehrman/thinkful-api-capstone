@@ -30,8 +30,8 @@ function clearCategories() {
   $(DOM.category).remove();
 }
 
-function clearPlaceResults() {
-  $(DOM.placeResult).remove();
+function clearAttractions() {
+  $(DOM.attraction).remove();
 }
 
 export default {
@@ -78,11 +78,14 @@ export default {
     return state.attractions.find(attraction => attraction.$element.is($attraction)).map;
   },
   showMap($attraction) {
-    state.attractions.find(attraction => attraction.$element.is($attraction)).createMap();
+    state.attractions.find(attraction => attraction.$element.is($attraction)).showMap();
+  },
+  closeMap($attraction) {
+    state.attractions.find(attraction => attraction.$element.is($attraction)).closeMap();
   },
   reset() {
     toggleProgress();
     clearCategories();
-    clearPlaceResults();
+    clearAttractions();
   },
 };

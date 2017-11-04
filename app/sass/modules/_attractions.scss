@@ -48,6 +48,11 @@
 
     & > h2 {
       margin: 0;
+
+      & > i {
+        float: right;
+        cursor: pointer;
+      }
     }
   }
 
@@ -102,6 +107,30 @@
     &--empty {
       background-color: transparent;
       padding: 24.25px;
+    }
+  }
+
+  & .reveal {
+    background-color: rgba(#fff, 0.95);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: translateY(100%);
+    transition: all 1s;
+
+    &.active {
+      transform: translateY(0);
+    }
+
+    &__close {
+      color: #333;
+      cursor: pointer;
+      font-size: 2rem;
+      font-weight: 300;
+      float: right;
+      margin: 5px;
     }
   }
 }

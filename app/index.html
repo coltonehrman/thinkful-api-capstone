@@ -57,7 +57,7 @@
 
         <div class="attraction__content">
           <div class="attraction__header">
-            <h2>{{name}}</h2>
+            <h2>{{name}}<i class="material-icons activator">map</i></h2>
             <div class="attraction__category">{{category}}</div>
           </div>
 
@@ -82,7 +82,10 @@
           {{/price}}
         </div>
 
-        <div class="map"></div>
+        <div class="reveal">
+          <i class="reveal__close material-icons">close</i>
+          <div class="map"></div>  
+        </div>
       </div>
     </script>
 

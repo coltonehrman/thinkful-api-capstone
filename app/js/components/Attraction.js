@@ -17,7 +17,7 @@ export default class Attraction {
         this.place.coords.lat,
         this.place.coords.lng,
       );
-      const map = new google.maps.Map(this.$element.find('.map').get(0), {
+      const map = new google.maps.Map(this.$element.find(DOM.map).get(0), {
         zoom: 15,
         center: coords,
       });
@@ -33,16 +33,18 @@ export default class Attraction {
         google.maps.event.trigger(map, 'resize');
       });
     }
-
-    this.showMap();
   }
 
   showMap() {
-    const $map = this.$element.find('.map');
+    const $reveal = this.$element.find(DOM.reveal);
 
-    $map.css({
-      position: 'absolute',
-    });
+    this.createMap();
+    $reveal.addClass('active');
+  }
+
+  closeMap() {
+    const $reveal = this.$element.find(DOM.reveal);
+    $reveal.removeClass('active');
   }
 
   createRating() {

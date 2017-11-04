@@ -25,6 +25,7 @@ function setupEventListeners() {
 
     UIController.Search.clear();
     UIController.Place.setLogo(name);
+    UIController.Place.reset();
     UIController.Screen.goTo(DOM.placeScreen);
 
     getLatLong(placeId).then((loc) => {
@@ -53,6 +54,11 @@ function setupEventListeners() {
   $(document).on('click', DOM.googleMapActivator, (e) => {
     const $attraction = $(e.target).parents(DOM.place);
     UIController.Place.showMap($attraction);
+  });
+
+  $(document).on('click', DOM.revealClose, (e) => {
+    const $attraction = $(e.target).parents(DOM.place);
+    UIController.Place.closeMap($attraction);
   });
 }
 

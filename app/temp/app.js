@@ -78,6 +78,7 @@
 
 	    _UIController2.default.Search.clear();
 	    _UIController2.default.Place.setLogo(name);
+	    _UIController2.default.Place.reset();
 	    _UIController2.default.Screen.goTo(_UIController.DOM.placeScreen);
 
 	    (0, _google.getLatLong)(placeId).then(function (loc) {
@@ -106,6 +107,11 @@
 	  $(document).on('click', _UIController.DOM.googleMapActivator, function (e) {
 	    var $attraction = $(e.target).parents(_UIController.DOM.place);
 	    _UIController2.default.Place.showMap($attraction);
+	  });
+
+	  $(document).on('click', _UIController.DOM.revealClose, function (e) {
+	    var $attraction = $(e.target).parents(_UIController.DOM.place);
+	    _UIController2.default.Place.closeMap($attraction);
 	  });
 	} /* global window $ document */
 
@@ -286,7 +292,10 @@
 	  attractions: '.attractions',
 	  attraction: '.attraction',
 	  attractionRating: '.attraction__rating',
-	  googleMapActivator: '.activator'
+	  googleMapActivator: '.activator',
+	  map: '.map',
+	  reveal: '.reveal',
+	  revealClose: '.reveal__close'
 	};
 
 	exports.default = DOM;
@@ -409,8 +418,8 @@
 	  $(_DOM2.default.category).remove();
 	}
 
-	function clearPlaceResults() {
-	  $(_DOM2.default.placeResult).remove();
+	function clearAttractions() {
+	  $(_DOM2.default.attraction).remove();
 	}
 
 	exports.default = {
@@ -463,12 +472,17 @@
 	  showMap: function showMap($attraction) {
 	    _state2.default.attractions.find(function (attraction) {
 	      return attraction.$element.is($attraction);
-	    }).createMap();
+	    }).showMap();
+	  },
+	  closeMap: function closeMap($attraction) {
+	    _state2.default.attractions.find(function (attraction) {
+	      return attraction.$element.is($attraction);
+	    }).closeMap();
 	  },
 	  reset: function reset() {
 	    toggleProgress();
 	    clearCategories();
-	    clearPlaceResults();
+	    clearAttractions();
 	  }
 	};
 
@@ -520,7 +534,7 @@
 	    value: function createMap() {
 	      if (!this.map) {
 	        var coords = new google.maps.LatLng(this.place.coords.lat, this.place.coords.lng);
-	        var map = new google.maps.Map(this.$element.find('.map').get(0), {
+	        var map = new google.maps.Map(this.$element.find(_UIController.DOM.map).get(0), {
 	          zoom: 15,
 	          center: coords
 	        });
@@ -536,17 +550,20 @@
 	          google.maps.event.trigger(map, 'resize');
 	        });
 	      }
-
-	      this.showMap();
 	    }
 	  }, {
 	    key: 'showMap',
 	    value: function showMap() {
-	      var $map = this.$element.find('.map');
+	      var $reveal = this.$element.find(_UIController.DOM.reveal);
 
-	      $map.css({
-	        position: 'absolute'
-	      });
+	      this.createMap();
+	      $reveal.addClass('active');
+	    }
+	  }, {
+	    key: 'closeMap',
+	    value: function closeMap() {
+	      var $reveal = this.$element.find(_UIController.DOM.reveal);
+	      $reveal.removeClass('active');
 	    }
 	  }, {
 	    key: 'createRating',

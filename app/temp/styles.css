@@ -682,6 +682,9 @@ html, body {
     text-align: center; }
     .attraction__header > h2 {
       margin: 0; }
+      .attraction__header > h2 > i {
+        float: right;
+        cursor: pointer; }
   .attraction__category {
     border-radius: 3px;
     background-color: #94bbcf;
@@ -724,6 +727,26 @@ html, body {
     .attraction__price--empty {
       background-color: transparent;
       padding: 24.25px; }
+  .attraction .reveal {
+    background-color: rgba(255, 255, 255, 0.95);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+    transition: all 1s; }
+    .attraction .reveal.active {
+      -webkit-transform: translateY(0);
+              transform: translateY(0); }
+    .attraction .reveal__close {
+      color: #333;
+      cursor: pointer;
+      font-size: 2rem;
+      font-weight: 300;
+      float: right;
+      margin: 5px; }
 
 .br-theme-fontawesome-stars-o .br-widget a.br-selected:after,
 .br-theme-fontawesome-stars-o .br-widget a.br-fractional:after {

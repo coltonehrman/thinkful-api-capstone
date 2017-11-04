@@ -14,6 +14,9 @@ const DOM = {
   attraction: '.attraction',
   attractionRating: '.attraction__rating',
   googleMapActivator: '.activator',
+  map: '.map',
+  reveal: '.reveal',
+  revealClose: '.reveal__close',
 };
 
 export default DOM;
