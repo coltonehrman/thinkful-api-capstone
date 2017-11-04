@@ -15,7 +15,7 @@
     <!-- Import materialize.css -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css"> -->
 
-    <link rel="stylesheet" href="css/styles-2a78d94ada.css"/>
+    <link rel="stylesheet" href="css/styles-428fd10554.css"/>
   </head>
 
   <body>
@@ -26,21 +26,66 @@
       
       <input class="place-search" type="search" placeholder="Ex. Las Vegas, Houston">
       <ul class="place-results">
-        <li class="no-results">No Results...</li>
+        <li class="no-results">No Results</li>
       </ul>
     </div>
 
-    <div class="place screen">
-      <header class="place__header">
-        <p class="place__name brand-logo flow-text left"></p>
-        <button class="back-btn"><i class="large material-icons">replay</i></button>
+    <div class="place screen hide">
+      <header class="header-bar">
+        <section class="header-bar__content">
+          <h1 class="header-bar__logo"></h1>
+          <button class="back-btn">
+            <i class="large material-icons">replay</i>
+          </button>
+        </section>
       </header>
 
-      <div class="container">
-        <div class="place__categories"></div>
-        <div class="place__results row"></div>
+      <div class="categories__container">
+        <ul class="categories"></ul>
       </div>
+      
+      <div class="attractions"></div>
     </div>
+
+    <script id="attraction-template" type="text/babel">
+      <div class="attraction">
+        <div class="attraction__image activator">
+          <img src="{{photo}}">
+        </div>
+
+        <div class="attraction__content">
+          <div class="attraction__header">
+            <h2>{{name}}<i class="material-icons activator">map</i></h2>
+            <div class="attraction__category">{{category}}</div>
+          </div>
+
+          <div class="attraction__address">
+            <p>{{{address}}}</p>
+          </div>
+        </div>
+
+        <div class="attraction__footer">
+          <select class="attraction__rating" name="rating" data-current-rating="{{rating}}">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          {{#price}}
+            <p class="attraction__price attraction__price--{{price.length}}">{{price}}</p>
+          {{/price}}
+          {{^price}}
+            <p class="attraction__price attraction__price--empty"></p>
+          {{/price}}
+        </div>
+
+        <div class="reveal">
+          <i class="reveal__close material-icons">close</i>
+          <div class="map"></div>  
+        </div>
+      </div>
+    </script>
 
     <!-- Import Google Places API -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYlbzHkh8NuvIE8NVPdu0K5vgraQuoZbo&libraries=places"></script>
@@ -49,8 +94,6 @@
 
     <script src="lib/jquery.barrating.min.js"></script>
 
-    <script src="lib/materialize-96283f8d6b.js"></script>
-
-    <script src="js/app-af7a942d11.js"></script>
+    <script src="js/app-8f1f047cf6.js"></script>
   </body>
 </html>
